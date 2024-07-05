@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Stock - Leefbaarometer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #housing {
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            border: 2px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+        td.indicator {
+            width: 30%; /* Adjusted width */
+        }
+        p.definition {
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+
+    <section id="housing">
+        <h2>Housing Stock</h2>
+        <p class="definition">The Housing Stock dimension focuses on the quality, diversity, and condition of residential buildings, which are pivotal in shaping the living standards and satisfaction of residents. Adequate, well-maintained housing contributes significantly to personal comfort and community stability.</p>
+        <table>
+            <tr>
+                <th>Indicator</th>
+                <th>Explanation</th>
+            </tr>
+            <tr>
+                <td class="indicator">Surface area of homes</td>
+                <td class="explanation">Larger living spaces are associated with higher liveability by providing more comfort and reducing overcrowding.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Proximity to monuments</td>
+                <td class="explanation">Living near historical monuments can enhance the cultural value of a neighborhood, increasing its attractiveness and residents' pride in their community.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Construction height</td>
+                <td class="explanation">Higher buildings may offer better views and more residential units, but can also lead to feelings of crowding if not well-managed.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Home vacancy</td>
+                <td class="explanation" >Vacant homes can signify declining areas, affecting community morale and security.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Construction period</td>
+                <td class="explanation">Newer constructions often provide modern amenities and are built to current safety standards, increasing liveability.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Construction type</td>
+                <td class="explanation">The type of construction affects thermal comfort and energy efficiency, impacting residents' health and economic well-being.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Private rental</td>
+                <td class="explanation" rowspan="2">A balance between rental and owner-occupied homes can influence community stability. Owner-occupied homes typically encourage longer resident tenures and more community involvement, which enhances social cohesion and overall liveability.</td>
+            </tr>
+            <tr>
+                <td class="indicator">Owner-occupied homes</td>
+            </tr>
+            <tr>
+                <td class="indicator">Overcrowding</td>
+                <td class="explanation">High levels of overcrowding can lead to health problems, stress, and reduced quality of life, making it a critical indicator of housing adequacy and liveability.</td>
+            </tr>
+        </table>
+    </section>
+
+</body>
+</html>

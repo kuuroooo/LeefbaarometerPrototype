@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LBM Prototype B - C</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Filters</h2>
+
+        <div class="filter-section">
+            <label for="period">Period:</label>
+            <select id="period">
+                <option value="2022">2022</option>
+                <option value="2020">2020</option>
+                <option value="2018">2018</option>
+                <option value="2014">2014</option>                
+            </select>
+        </div>
+        <div class="filter-section">
+            <h3>Custom Weighting</h3>
+            <label for="physical" title="Physical Environment" onclick="showExplanation('physical_environment_explanations.html')" class="label-button" data-title="Examines the impact of infrastructure and nature on liveability, including roads, green spaces, and hazards">Physical Environment:</label>
+            <input type="range" id="p" name="physical" min="1" max="5" value="3">
+            <label for="housing" title="Housing Stock" onclick="showExplanation('housing_stock_explanations.html')" class="label-button" data-title="Examines residential building traits like size, age, and type.">Housing Stock:</label>
+            <input type="range" id="hs" name="housing" min="1" max="5" value="3">
+            <label for="services" title="Services" onclick="showExplanation('services_explanations.html')" class="label-button" data-title="Evaluates access and quality of services like education and healthcare.">Services:</label>
+            <input type="range" id="s" name="services" min="1" max="5" value="3">
+            <label for="coherence" title="Social Cohesion" onclick="showExplanation('social_cohesion_explanations.html')" class="label-button" data-title="Assesses social networks and community engagement, highlighting diversity and interactions.">Social Cohesion:</label>
+            <input type="range" id="sc" name="coherence" min="1" max="5" value="3">
+            <label for="safety&nuisance" title="Safety & Nuisance" onclick="showExplanation('nuisance_insecurity_explanations.html')" class="label-button" data-title="Measures safety and community nuisances, reflecting crime rates and public order.">Safety & Nuisance:</label>
+            <input type="range" id="s&n" name="safety&nuisance" min="1" max="5" value="3">
+          
+        </div>
+        <button id="reset-button">Reset</button>
+        <button id="toggle-list">Display Ranked List of Neighborhoods</button>
+        <div id="list-container" style="display: none;">
+            <h3>Amstelveen Neighborhoods Ranked</h3>
+            <ul id="neighborhood-list"></ul>
+        </div>
+    </div>
+    <div id ="map-container">
+        <div id = "map">
+            <div id="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #cf783f;"></div>
+                    <div class="legend-text">Very Insufficient</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #d7995e;"></div>
+                    <div class="legend-text">Largely Insufficient</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #e0b881;"></div>
+                    <div class="legend-text">Insufficient</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #fbf2c4;"></div>
+                    <div class="legend-text">Weak</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #d0d2a6;"></div>
+                    <div class="legend-text">Sufficient</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #a7b38a;"></div>
+                    <div class="legend-text">Largely Sufficient</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #819470;"></div>
+                    <div class="legend-text">Good</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #5e7657;"></div>
+                    <div class="legend-text">Very Good</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #3b5941;"></div>
+                    <div class="legend-text">Excellent</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="side-panel">
+            <button id="close-panel" onclick="hideSidePanel()">X</button>
+        </div>
+        
+        <script>
+            function showExplanation(url) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        const sidePanel = document.getElementById('side-panel');
+                        if (sidePanel) {
+                            sidePanel.innerHTML = '<button id="close-panel" onclick="hideSidePanel()">X</button>' + data;
+                            sidePanel.style.display = 'block';
+                            document.getElementById('map').style.width = '60%';
+                        } else {
+                            console.error('Side panel element not found.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading explanation:', error);
+                    });
+            }
+        
+            function hideSidePanel() {
+                const sidePanel = document.getElementById('side-panel');
+                sidePanel.style.display = 'none';
+                document.getElementById('map').style.width = '100%';
+            }
+        </script>
+    </div>
+<script src="script.js"></script>        
+</body>
+</html>
